@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import ProgressBar from './ProgressBar';
 import './MultiSteps.css';
-import cloud from '../assets/cloud.svg'
+import cloud from '../assets/cloud.svg';
+import mobileBarcode from '../assets/Barcode-mobile.svg';
+<assets />
+
 const MultiSteps = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [ticketData, setTicketData] = useState(null);
@@ -49,10 +52,10 @@ const handleFileUpload = async (e) => {
   if (file) {
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('upload_preset', 'HNG12_stage2_project_preset'); // Use your Cloudinary upload preset
+    formData.append('upload_preset', process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET); 
   
     try {
-      const res = await fetch('https://api.cloudinary.com/v1_1/dhspwfrlk/image/upload', {
+      const res = await fetch(process.env.REACT_APP_CLOUDINARY_URL, {
         method: 'POST',
         body: formData
       });
@@ -85,7 +88,7 @@ const handleFileUpload = async (e) => {
             <div >
               <div className='event-info-container'>
                 <div className='event-info-content'>
-                <h3>Techember Fest '25</h3>
+                <h3 className='event-name'>Techember Fest '25</h3>
                 <p className="event-info">Join us for an unforgettable experience at [Event Name]! Secure your spot now.</p>
                 </div>
               
@@ -245,16 +248,46 @@ const handleFileUpload = async (e) => {
           )}
 
           {currentStep === 3 && ticketData && (
-            <div>
-              <div className="ticket">
-                <h3>{ticketData.eventName}</h3>
-                <p>{ticketData.eventLocation}</p>
-                <img src={ticketData.profilePhoto} alt="Profile" className="ticket-avatar" />
-                <p>Name: {ticketData.fullName}</p>
-                <p>Email: {ticketData.email}</p>
-                <p>Ticket Type: {ticketData.ticketType}</p>
-                <p>Quantity: {ticketData.ticketQuantity}</p>
-                <div className="barcode">[Barcode Image Here]</div>
+            <div >
+              <div className="ticket-container " >
+                <div className='ticket'>
+                  <div className='event-div'>
+                    <div className='event-name mod'>{ticketData.eventName}</div>
+                    <div className='event-location mod1'>{ticketData.eventLocation}</div>
+                  </div>
+                  <div className='img-div'>
+                  <img src={ticketData.profilePhoto} alt="Profile" className="ticket-avatar" />
+                  </div>
+                  <div className='ticket-detail'>
+                    <div className='grid1'>
+                      <div className='query-header '>Enter your name</div>
+                      <div className='query-response'>{ticketData.fullName}</div>
+
+                    </div>
+                    <div className='grid2'>
+                      <div className='query-header '>Enter your email*</div>
+                      <div className='query-response'>{ticketData.email}</div>
+                    </div>
+                    <div className='grid3'>
+                      <div className='query-header'> Ticket Type:</div>
+                      <div className='query-response'>{ticketData.ticketType}</div>
+
+                    </div>
+                    <div className='grid4'>
+                      <div className='query-header'>Ticket for:</div>
+                      <div className='query-response'>{ticketData.ticketQuantity}</div>
+                    </div>
+                    <div className='grid5'>
+                      <div className='query-header'>Special Request:</div>
+                      <div className='query-response'>{ticketData.specialRequest}</div>
+                    </div>
+                  </div>
+                </div>
+                <div className='barcode-div' >
+                  <div className='barcode'></div>
+                  <img className='barcode-img' src={mobileBarcode} alt="Bar-code image"/>
+                </div>
+
               </div>
 
               <div className='ticket-actions'>
