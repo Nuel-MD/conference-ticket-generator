@@ -1,0 +1,18 @@
+.progress-container {
+  display: flex;
+  height: 4px;
+  align-items: center;
+  border-radius: 5px;
+  align-self: stretch;
+  background: #0E464F;
+
+  }
+  
+  .progress-bar {
+    border-radius: 5px;
+    transition: width 0.5s;
+    align-self: stretch;
+    background: #24A0B5;
+    height: 100%;
+  }
+  
