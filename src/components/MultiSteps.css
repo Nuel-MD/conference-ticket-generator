@@ -16,6 +16,7 @@ border-radius: 32px;
 border: 1px solid #0E464F;
 background: #08252B;
 margin-top: 18px;
+width: 100%;
 }
 
 .form-header {
@@ -26,11 +27,7 @@ margin-top: 18px;
     gap: 12px;
    
 }
-.multi-steps{
-    display: flex;
-    max-width: 700px;
-    gap: 16px;
-}
+
 .step-count{
     color: var(--color-grey-98, #FAFAFA);
 
@@ -413,8 +410,19 @@ textarea {
     background: #052228;
 
 }
+.multi-steps{
+    display: flex;
+    min-width: 40%;
+    max-width: 700px;
+    gap: 16px;
+
+}
 
 @media (max-width: 768px){
+    .multi-steps{
+        min-width: 100%;
+    
+    }
     .form-header h2{
         font-size: 20px;
         flex-direction: column;
@@ -531,9 +539,10 @@ textarea {
   }
   
   .profile-img {
-    width: 100%;
-    height: 100%;
+    width: 300px !important;
+    height: 300px !important;
     object-fit: cover;
+    border: 4px solid #197686;
     border-radius: 8px;
   }
   
@@ -649,7 +658,6 @@ border: 4px solid rgba(36, 160, 181, 0.50);
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid  purple;
 }
 
 .ticket-actions{
@@ -672,5 +680,13 @@ border: 4px solid rgba(36, 160, 181, 0.50);
     color: #24A0B5;
     background: transparent;
     flex: 1;
+    
+}
+.cloud-box{
+    display: flex;
+    padding: 35px;
+    background: transparent;
+    flex-direction: column;
+    align-items: center;
     
 }

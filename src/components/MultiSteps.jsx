@@ -12,7 +12,7 @@ const MultiSteps = () => {
   const [ticketType, setTicketType] = useState("");
   const [ticketQuantity, setTicketQuantity] = useState(1);
   const [profilePhoto, setProfilePhoto] = useState(null);
-
+  const [uploadCompleted, setUploadCompleted] = useState(false);
   const { register, handleSubmit, formState: { errors } } = useForm();
 
   const steps = 3;
@@ -29,6 +29,13 @@ const MultiSteps = () => {
     if (currentStep === 1 && !ticketType) {
       alert('Please select a ticket type before proceeding.');
       return;
+    }
+    if (currentStep === 2) {
+      if (!profilePhoto) {
+        alert('Please upload a profile photo.');
+        return;
+      }
+      
     }
   
     // Collect data from current step
@@ -47,25 +54,36 @@ const MultiSteps = () => {
     currentStep === steps ? handleFinalSubmit() : handleNextStep();
   };
 
-const handleFileUpload = async (e) => {
-  const file = e.target.files[0];
-  if (file) {
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('upload_preset', process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET); 
+  const handleFileUpload = async (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      // Create temporary URL for instant preview
+      const localUrl = URL.createObjectURL(file);
+      setProfilePhoto(localUrl);
+      setUploadCompleted(false);
   
-    try {
-      const res = await fetch(process.env.REACT_APP_CLOUDINARY_URL, {
-        method: 'POST',
-        body: formData
-      });
-      const data = await res.json();
-      setProfilePhoto(data.secure_url); // Set Cloudinary URL directly
-    } catch (err) {
-      console.error('Image upload failed', err);
+      // Upload to Cloudinary
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('upload_preset', process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET);
+  
+      try {
+        const res = await fetch(process.env.REACT_APP_CLOUDINARY_URL, {
+          method: 'POST',
+          body: formData
+        });
+        const data = await res.json();
+        
+        // Update with Cloudinary URL and clean up local URL
+        setProfilePhoto(localUrl);
+        setUploadCompleted(true);
+      } catch (err) {
+        console.error('Upload failed', err);
+        setUploadCompleted(false);
+        URL.revokeObjectURL(localUrl);
+      }
     }
-  }
-};
+  };
 
   
   return (
@@ -183,7 +201,7 @@ const handleFileUpload = async (e) => {
             className="profile-img" // Style the Cloudinary URL here
           />
         ) : (
-          <div>
+          <div className="cloud-box">
             <img src={cloud} alt="cloud image"/>
             <p>Drag & Drop or Click to Upload</p>
           </div>

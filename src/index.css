@@ -14,6 +14,7 @@ body{
     justify-content: center;
     align-items: center;
     display: flex;
+
 }
 
 .app>div:nth-child(1) {
