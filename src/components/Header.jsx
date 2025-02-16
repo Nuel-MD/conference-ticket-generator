@@ -10,7 +10,7 @@ const Header = () => {
       alt="Logo"
       className="svg-image"
     />
-      <div>
+      <div className='flex'>
         <div className='nav-links'>Events</div>
         <div className='nav-links'>My Tickets</div>
         <div className='nav-links'> About Project</div>

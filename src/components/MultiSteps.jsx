@@ -248,7 +248,7 @@ const handleFileUpload = async (e) => {
           )}
 
           {currentStep === 3 && ticketData && (
-            <div >
+            <div className='stabilizer' >
               <div className="ticket-container " >
                 <div className='ticket'>
                   <div className='event-div'>
@@ -293,9 +293,7 @@ const handleFileUpload = async (e) => {
               <div className='ticket-actions'>
               <button onClick={() => setTicketData(null)}>Book Another Ticket</button>
               <button onClick={() => window.print()}>Download Ticket</button>
-
               </div>
-              
             </div>
           )}
         </form>

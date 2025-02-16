@@ -5,8 +5,12 @@ import MultiSteps from './components/MultiSteps';
 function App() {
   return (
     <div className='app'>
+      <div>
       <Header />
+      </div>
+      <div >
       <MultiSteps />
+      </div>
     </div>
   );
 }

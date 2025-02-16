@@ -17,13 +17,19 @@ border: 1px solid #0E464F;
 background: #08252B;
 margin-top: 18px;
 }
-.form-header{
+
+.form-header {
     width: 100%;
     color: #FAFAFA;
     display: flex;
     flex-direction: column;
     gap: 12px;
    
+}
+.multi-steps{
+    display: flex;
+    max-width: 700px;
+    gap: 16px;
 }
 .step-count{
     color: var(--color-grey-98, #FAFAFA);
@@ -215,13 +221,7 @@ select{
     color: #FAFAFA;
     background: transparent;
 }
-.ticket-actions{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-    align-self: stretch;
-}
+
 
 .ticket-actions>button{
     display: flex;
@@ -644,4 +644,34 @@ border: 4px solid rgba(36, 160, 181, 0.50);
     display: flex; 
     justify-content: center;
     align-items: center;
+}
+.stabilizer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid  purple;
+}
+
+.ticket-actions{
+    display: flex;
+    gap: 16px;
+    flex-direction: row;
+    flex: 1 0 0;
+}
+@media (max-width: 768px){
+    .ticket-actions{
+        flex-direction: column;
+        border: 1px solid #24A0B5;
+    } 
+    
+}
+.ticket-actions button{
+    padding: 8px 16px;
+    border-radius: 8px;
+    
+    border: 1px solid #24A0B5;
+    color: #24A0B5;
+    background: transparent;
+    flex: 1;
+    
 }
