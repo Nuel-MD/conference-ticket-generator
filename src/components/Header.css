@@ -36,5 +36,9 @@ min-width: 80%;
   @media (max-width: 768px) {
     .nav-links {
       display: none !important;
-    }
+    
+  }
+  .header {
+min-width: 100%;
+  }
   }
